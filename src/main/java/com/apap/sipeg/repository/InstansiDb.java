@@ -7,5 +7,7 @@ import com.apap.sipeg.model.InstansiModel;
 
 @Repository
 public interface InstansiDb extends JpaRepository<InstansiModel, Long>{
+	
+	InstansiModel findById(long id);
 
 }

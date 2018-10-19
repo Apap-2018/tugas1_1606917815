@@ -2,25 +2,118 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<meta charset="ISO-8859-1">
+	<title>Home Page</title>
+	
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+	<script>
+			$(document).ready(function () {
+			    $("#home-form").submit(function (e) {
+			    	if ($('#form-value').val() == '') {
+			            e.preventDefault();
+			    		swal ( "Tidak dapat menampilkan detail jabatan!",  "Anda belum memilih jabatan",  "error");
+			        }
+			    });
+			    
+			    $("#home-form2").submit(function (e2) {
+			    	if ($('#form-value2').val() == '') {
+			            e2.preventDefault();
+			            swal ( "Tidak dapat menampilkan pegawai termuda dan tertua!",  "Anda belum memilih instansi",  "error");
+			        }
+			    });
+			});
+	</script>
+		
+<!-- 	<object th:include="fragments/fragment :: common-style" th:remove="tag"></object> -->
+		
+	
 </head>
 
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	
-	<h2>Sistem Informasi Kepegawaian</h2>
-	<h3>Selamat datang di Sistem Informasi Kepegawaian</h3>
-	<h2>Lihat Data Pegawai berdasarkan NIP</h2>
-		
-	Masukkan Nomor Induk Pegawai: <br>
+	<!-- fitur 1 -->
+	<div class="container-fluid">
+			<div align="center">
+				<h2>Sistem Informasi Kepegawaian</h2>
+				<h5>Selamat Datang di Sistem Informasi Kepegawaian</h5>
+			</div>
+			<hr>
 			
-	<form th:action="@{/pegawai}" method="GET">
-			<label for="nip">NIP</label>
-			<input type="text" name="nip"/>
-			<p></p>
-			<button type="submit">Lihat</button>
-	</form>
-
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card">
+						<div class="card-header">
+							Lihat Data Pegawai Berdasarkan NIP
+						</div>
+						<form th:action="@{/pegawai}" method="GET">
+							<div class="card-body">
+								<label for="licenseNumber">Masukkan Nomor Induk Pegawai</label>
+								<input required placeholder="NIP" type="text" name="nip" class="form-control" />
+								<p></p>
+								<button type="submit" class="btn btn-primary">Lihat</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				
+				<!-- fitur 6 -->
+				<br>
+				<div class="col-md-4">
+					<div class="card">
+						<div class="card-header">
+							Lihat Detail Jabatan
+						</div>
+						<form th:action="@{/jabatan/view}" id="jabatanForm" method="GET">
+							<div class="card-body">
+								<form action="/jabatan/view" id="jabatanForm" method="get">
+									<p>Pilih Jabatan</p>
+									<select required="required" name="id" form="jabatanForm">
+										<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
+										<span th:each="jabatan : ${listJabatan}">
+											<option th:value="${jabatan.id}" th:text="${jabatan.nama}"></option>
+										</span>
+									</select>
+									<br>
+									<br>
+									<input class="btn btn-primary" type="submit" value="Lihat">
+								</form>
+					</div>
+						</form>
+					</div>
+				</div>
+			
+				<!-- fitur 10 -->
+				<br>
+				<div class="col-md-4">
+						<div class="card">
+							<div class="card-header">
+								Lihat Pegawai Tertua dan Termuda
+							</div>
+							<form th:action="@{/pegawai/tertua-termuda}" id="pegawaiForm" method="GET">
+								<div class="card-body">
+									<form action="/pegawai/tertua-termuda" id="pegawaiForm" method="get">
+										<p>Pilih Instansi</p>
+										<select required="required" name="id" form="pegawaiForm">
+											<option disabled="disabled" selected="selected" >Pilih Instansi</option>
+											<span th:each="instansi : ${listInstansi}">
+												<option th:value="${instansi.id}" th:text="${instansi.nama}"></option>
+											</span>
+										</select>
+										<br>
+										<br>
+										<input class="btn btn-primary" type="submit" value="Lihat">
+									</form>
+								</div>
+							</form>
+						</div>
+					</div>
+			</div>
 </body>
 </html>
