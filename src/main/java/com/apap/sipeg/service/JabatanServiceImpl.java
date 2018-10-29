@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apap.sipeg.model.JabatanModel;
+import com.apap.sipeg.model.PegawaiModel;
 import com.apap.sipeg.repository.JabatanDb;
 
 @Service
@@ -65,5 +66,6 @@ public class JabatanServiceImpl implements JabatanService {
 	public void deleteById(long id) {
 		jabatanDb.deleteById(id);
 	}
+	
 	
 }

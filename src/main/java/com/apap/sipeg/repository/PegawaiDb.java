@@ -1,5 +1,6 @@
 package com.apap.sipeg.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,5 +18,9 @@ public interface PegawaiDb extends JpaRepository<PegawaiModel, Long>{
 	List<PegawaiModel> findByInstansiOrderByTanggalLahirAsc(InstansiModel instansi);
 	List<PegawaiModel> findByInstansi(InstansiModel instansi);
 	List<PegawaiModel> findByListJabatan(JabatanModel listJabatan);
+//	List<PegawaiModel> findByInstansiAndTanggalLahirAndTahunMasukOrderByNipAsc(InstansiModel instansi,
+//			Date tanggalLahir, String tahunMasuk);
+	List<PegawaiModel> findByInstansiAndTanggalLahirAndTahunMasuk(InstansiModel instansi, Date tanggalLahir,
+			String tahunMasuk);
 
 }

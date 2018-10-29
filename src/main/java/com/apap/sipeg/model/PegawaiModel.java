@@ -2,6 +2,7 @@ package com.apap.sipeg.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -74,6 +75,7 @@ public class PegawaiModel implements Serializable {
             joinColumns = { @JoinColumn(name = "id_pegawai") },
             inverseJoinColumns = { @JoinColumn(name = "id_jabatan") })
     private List<JabatanModel> listJabatan;
+//	private List<JabatanModel> listJabatan = new ArrayList<JabatanModel>();
 
 	public long getId() {
 		return id;
@@ -138,8 +140,6 @@ public class PegawaiModel implements Serializable {
 	public void setListJabatan(List<JabatanModel> listJabatan) {
 		this.listJabatan = listJabatan;
 	}
-
-
 	
 	
 }

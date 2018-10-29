@@ -1,25 +1,28 @@
 package com.apap.sipeg.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.apap.sipeg.model.JabatanModel;
+import com.apap.sipeg.model.PegawaiModel;
 import com.apap.sipeg.service.JabatanService;
+import com.apap.sipeg.service.PegawaiService;
 
 @Controller
 public class JabatanController {
 	@Autowired
 	private JabatanService jabatanService;
 	private long id;
+	
+	@Autowired
+	private PegawaiService pegawaiService;
 	
 	//fitur 5.1 done
 	@RequestMapping(value = "/jabatan/tambah", method = RequestMethod.GET)
@@ -40,6 +43,9 @@ public class JabatanController {
 		@RequestMapping(value = "/jabatan/view")
 		private String viewPegawai(@RequestParam("id") Long id, Model model) {
 			JabatanModel jabatan = jabatanService.getJabatanDetailById(id);	
+			List<PegawaiModel> pegawai = pegawaiService.getPegawaiByJabatan(jabatan);
+			int jumlahPegawai = pegawai.size();
+			model.addAttribute("jumlahPegawai", jumlahPegawai);
 			model.addAttribute("jabatan", jabatan);
 			return "view_jabatan";
 		}

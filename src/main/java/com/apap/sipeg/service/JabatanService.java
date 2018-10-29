@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.apap.sipeg.model.JabatanModel;
+import com.apap.sipeg.model.PegawaiModel;
 import com.apap.sipeg.repository.JabatanDb;
 
 public interface JabatanService {

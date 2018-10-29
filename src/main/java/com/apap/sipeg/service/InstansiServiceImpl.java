@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apap.sipeg.model.InstansiModel;
+import com.apap.sipeg.model.ProvinsiModel;
 import com.apap.sipeg.repository.InstansiDb;
 
 @Service
@@ -35,6 +36,11 @@ public class InstansiServiceImpl implements InstansiService {
 	@Override
 	public List<InstansiModel> getAllInstansi() {
 		return instansiDb.findAll();
+	}
+	
+	@Override
+	public List<InstansiModel> getInstansiByProvinsi(ProvinsiModel provinsi) {
+		return instansiDb.findByProvinsi(provinsi);
 	}
 	
 	
